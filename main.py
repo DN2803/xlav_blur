@@ -3,6 +3,25 @@ from tkinter import filedialog
 from PIL import Image, ImageTk
 import cv2
 from blur import *
+from tkinter import messagebox
+
+def validate_entry(text):
+    try:
+        int_value = int(text)
+        if int_value % 2 != 0:
+            return True
+        else:
+            return False
+    except ValueError:
+        return False
+# use to valid kernel size
+def on_validate(P, entry_value):
+    if validate_entry(entry_value):
+        return True
+    else:
+        root.bell()  # Phát âm thanh khi có giá trị không hợp lệ
+        return False
+
 class ImageProcessingApp:
     def __init__(self, root):
         self.root = root
@@ -108,6 +127,10 @@ class ImageProcessingApp:
     def process_image(self):
         if self.original_image is not None:
             kernel_size = int(self.kernel_size_entry.get())
+            entered_value = self.kernel_size_entry.get()
+            if not validate_entry(entered_value):
+                messagebox.showerror("Lỗi", "Vui lòng nhập số lẻ.")
+                return
             blur_method = self.blur_method_var.get()
             sigma = float(self.sigma_entry.get())
             if blur_method == "CV2_AVERANGE":
