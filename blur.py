@@ -16,8 +16,8 @@ def blur_avarage(img, ksize):
     ksize2 = ksize[1] //2
     result = img.copy()
     for z in range (d):
-        for x in range(1, h-1):
-            for y in range(1, w-1):
+        for x in range(ksize1, h-ksize1):
+            for y in range(ksize2, w-ksize2):
                 temp = 0
                 for i in range (-ksize1 , ksize1+1):
                     for j in range (-ksize2, ksize2+1):
@@ -61,8 +61,8 @@ def blur_Gaussian(img, ksize, sigma):
     result = img.copy()
 
     for z in range(d): 
-        for x in range(1, h-1):
-            for y in range(1, w-1):
+        for x in range(ksize1, h-ksize1):
+            for y in range(ksize2, w-ksize2):
                 temp = 0
                 for i in range (-ksize1 , ksize1+1):
                     for j in range (-ksize2, ksize2+1):
