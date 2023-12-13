@@ -1,5 +1,20 @@
 import numpy as np
+import cv2
 
+# Thêm Gaussian noise: https://pythonexamples.org/python-opencv-add-noise-to-image/
+def GaussianNoise(img, stddev): 
+    mean = (0,0,0)
+    noise = np.zeros(img.shape, np.uint8)
+
+    stddev = (stddev,stddev,stddev)
+
+    # Tạo Gaussian noise ngẫu nhiên
+    cv2.randn(noise, mean, stddev)
+
+    # Thêm noise vào ảnh
+    noisy_img = cv2.add(img, noise)
+    
+    return noisy_img
 
 
 def blur_avarage(img, ksize): 
